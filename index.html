@@ -344,13 +344,17 @@
     </footer>
 
     <script>
-        const CANVAS_SIZE = 1080;
+        const CANVAS_SIZE = 2160; // 4K Square Resolution
         const canvas = document.getElementById('editorCanvas');
         const ctx = canvas.getContext('2d');
         
         // High resolution for crisp export
         canvas.width = CANVAS_SIZE;
         canvas.height = CANVAS_SIZE;
+        
+        // Ensure high quality image scaling
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
 
         // Application State
         const state = {
