@@ -3,91 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Eid Ul Adha DP Maker</title>
+    <title>Eid Ul Adha DP Maker - Premium</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-blur: 16px;
+            --accent-gold: #fbbf24;
+            --accent-gold-hover: #f59e0b;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0f172a; /* Deep night sky blue */
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #020617 100%);
+            background-attachment: fixed;
             color: #f8fafc;
             overscroll-behavior-y: contain;
             min-height: 100vh;
+            min-height: 100dvh;
+            margin: 0;
             overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Center app vertically on large screens */
+            transition: font-family 0.3s ease;
         }
-
-        .font-bengali {
+        
+        body.lang-bn {
             font-family: 'Hind Siliguri', sans-serif;
         }
 
-        /* Abstract Background Blobs */
         .bg-blob {
             position: absolute;
             border-radius: 50%;
             filter: blur(80px);
-            opacity: 0.4;
-            z-index: 0;
-            pointer-events: none;
+            z-index: -1;
+            opacity: 0.5;
+            animation: float 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .blob-1 {
-            top: -10%; right: -5%;
-            width: 40vw; height: 40vw;
-            background: radial-gradient(circle, #4f46e5 0%, transparent 70%);
-            animation: float 15s ease-in-out infinite alternate;
-        }
-        .blob-2 {
-            bottom: -10%; left: -10%;
-            width: 50vw; height: 50vw;
-            background: radial-gradient(circle, #eab308 0%, transparent 70%);
-            animation: float 20s ease-in-out infinite alternate-reverse;
-        }
+        .blob-1 { top: -10%; left: -10%; width: 40vw; height: 40vw; background: rgba(56, 189, 248, 0.2); }
+        .blob-2 { bottom: -10%; right: -10%; width: 50vw; height: 50vw; background: rgba(168, 85, 247, 0.15); animation-delay: -10s; }
+        .blob-3 { top: 40%; left: 50%; width: 30vw; height: 30vw; background: rgba(251, 191, 36, 0.1); animation-duration: 25s; }
 
         @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(50px, 30px) scale(1.1); }
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            100% { transform: translate(5%, 10%) scale(1.1) rotate(5deg); }
         }
 
-        /* Glassmorphism Panels */
         .glass-panel {
-            background: rgba(30, 41, 59, 0.4);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--glass-border);
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
         .glass-interactive {
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .glass-interactive:hover {
-            background: rgba(30, 41, 59, 0.6);
-            border-color: rgba(234, 179, 8, 0.4); /* Gold accent */
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
             transform: translateY(-2px);
         }
-
-        /* Canvas Checkerboard Base */
-        .canvas-bg {
-            background-color: rgba(15, 23, 42, 0.8);
-            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-            background-size: 20px 20px;
+        .glass-interactive:active {
+            transform: translateY(0);
         }
 
-        /* Custom Range Slider */
+        .canvas-bg {
+            background-image: 
+                linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%), 
+                linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%), 
+                linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%), 
+                linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
         input[type=range] {
-            -webkit-appearance: none;
+            -webkit-appearance: none; 
+            background: transparent; 
             width: 100%;
-            background: transparent;
+        }
+        input[type=range]:focus {
+            outline: none;
         }
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none;
             height: 24px;
             width: 24px;
             border-radius: 50%;
-            background: #eab308; /* Gold */
+            background: var(--accent-gold);
             cursor: pointer;
-            margin-top: -10px;
-            box-shadow: 0 0 15px rgba(234, 179, 8, 0.5);
+            margin-top: -10px; 
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.5), inset 0 0 4px rgba(255,255,255,0.8);
             border: 2px solid #fff;
             transition: transform 0.1s;
         }
@@ -96,279 +110,432 @@
         }
         input[type=range]::-webkit-slider-runnable-track {
             width: 100%;
-            height: 6px;
+            height: 4px;
             cursor: pointer;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 2px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        @keyframes shimmer {
+            100% { transform: translateX(100%); }
         }
 
-        /* Custom Scrollbar for Modal */
+        #toast-container {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            pointer-events: none;
+        }
+        .toast {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            font-size: 14px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
+            border-radius: 10px;
+            margin-block: 10px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: rgba(234, 179, 8, 0.5);
-            border-radius: 8px;
+            background: rgba(251, 191, 36, 0.5);
+            border-radius: 10px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: rgba(234, 179, 8, 0.8);
-        }
-
-        @keyframes shimmer {
-            100% { transform: translateX(100%); }
+            background: rgba(251, 191, 36, 0.8);
         }
     </style>
 </head>
-<body class="py-6 px-4 sm:px-6 md:py-12 lg:py-16 relative flex flex-col items-center min-h-screen">
+<body class="py-6 px-4 sm:px-6 md:py-12 relative w-full">
 
     <div class="bg-blob blob-1"></div>
     <div class="bg-blob blob-2"></div>
+    <div class="bg-blob blob-3"></div>
 
-    <!-- Top Navigation (Help & Lang Toggle) -->
-    <div class="absolute top-4 left-4 right-4 sm:top-6 sm:left-6 sm:right-6 flex justify-between items-center z-50 max-w-6xl mx-auto w-full pr-8 sm:pr-12">
-        <button onclick="openHelpModal()" class="glass-panel px-4 py-2 sm:px-5 sm:py-2.5 rounded-full flex items-center gap-2 hover:bg-white/10 transition-colors border border-white/10 shadow-lg active:scale-95 group">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 text-amber-400 group-hover:animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-            <span id="helpBtnText" class="text-xs sm:text-sm font-semibold text-slate-200 tracking-wide">Help</span>
-        </button>
+    <!-- Help Button -->
+    <button id="helpToggleBtn" class="fixed top-4 left-4 sm:top-6 sm:left-6 md:top-8 md:left-8 glass-panel glass-interactive px-4 py-2 md:px-5 md:py-2.5 rounded-full text-white text-xs sm:text-sm md:text-base font-medium z-50 flex items-center gap-2 shadow-lg" onclick="openHelpModal()">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        <span id="helpBtnText">Help</span>
+    </button>
+
+    <!-- Language Toggle Button -->
+    <button id="langToggleBtn" class="fixed top-4 right-4 sm:top-6 sm:right-6 md:top-8 md:right-8 glass-panel glass-interactive px-4 py-2 md:px-5 md:py-2.5 rounded-full text-white text-xs sm:text-sm md:text-base font-medium z-50 flex items-center gap-2 shadow-lg">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" /></svg>
+        <span id="langBtnText">বাংলা</span>
+    </button>
+
+    <!-- Help Modal Overlay -->
+    <div id="helpModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-slate-900/80 backdrop-blur-sm transition-opacity" onclick="closeHelpModal()"></div>
         
-        <button id="langToggleBtn" onclick="toggleLanguage()" class="glass-panel px-4 py-2 sm:px-5 sm:py-2.5 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors border border-white/10 shadow-lg active:scale-95">
-            <span class="text-amber-400 font-bold uppercase tracking-wider text-xs sm:text-sm">BN</span>
-        </button>
-    </div>
-
-    <!-- Help Modal -->
-    <div id="helpModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity duration-300 opacity-0 flex">
-        <div id="helpModalContent" class="glass-panel w-full max-w-md sm:max-w-lg p-5 sm:p-6 md:p-8 rounded-3xl border border-white/20 shadow-2xl transform scale-95 transition-all duration-300 opacity-0 relative max-h-[90vh] overflow-y-auto custom-scrollbar">
+        <!-- Modal Content (Responsive sizes) -->
+        <div class="glass-panel p-6 sm:p-8 md:p-10 rounded-2xl md:rounded-3xl w-full max-w-[95%] sm:max-w-md md:max-w-lg lg:max-w-xl relative z-10 transform scale-95 opacity-0 transition-all duration-300 border border-white/20 shadow-2xl max-h-[90vh] overflow-y-auto custom-scrollbar" id="helpModalContent">
             
-            <button onclick="closeHelpModal()" class="absolute top-4 right-4 sm:top-6 sm:right-6 text-slate-400 hover:text-white bg-white/5 hover:bg-white/10 rounded-full p-2 transition-colors sticky top-0 float-right">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            <button onclick="closeHelpModal()" class="absolute top-4 right-4 md:top-6 md:right-6 text-slate-400 hover:text-white transition-colors bg-white/5 rounded-full p-1 sticky left-[100%] z-20">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
 
-            <h2 id="helpTitle" class="text-2xl sm:text-3xl font-bold text-white mb-6 sm:mb-8 flex items-center gap-3">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 sm:h-8 sm:w-8 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                How to use
-            </h2>
+            <h2 id="helpTitle" class="text-2xl md:text-3xl font-bold text-white mb-6 md:mb-8 text-center drop-shadow-sm mt-2">How to use</h2>
+            
+            <div class="space-y-4 md:space-y-6">
+                <!-- Step 1 -->
+                <div class="flex gap-4 items-start bg-white/5 p-4 md:p-5 rounded-2xl border border-white/5">
+                    <div class="bg-amber-400/20 text-amber-400 w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center shrink-0 font-bold md:text-lg shadow-inner">1</div>
+                    <div>
+                        <h3 id="step1Title" class="text-white font-medium text-lg md:text-xl leading-tight">Select Photo</h3>
+                        <p id="step1Desc" class="text-slate-300 text-sm md:text-base mt-1.5 leading-relaxed">Tap 'Select Photo' to choose an image from your device.</p>
+                    </div>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="flex gap-4 items-start bg-white/5 p-4 md:p-5 rounded-2xl border border-white/5">
+                    <div class="bg-amber-400/20 text-amber-400 w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center shrink-0 font-bold md:text-lg shadow-inner">2</div>
+                    <div>
+                        <h3 id="step2Title" class="text-white font-medium text-lg md:text-xl leading-tight">Adjust Position</h3>
+                        <p id="step2Desc" class="text-slate-300 text-sm md:text-base mt-1.5 leading-relaxed">Drag the image on the canvas to position it perfectly. Use the slider to zoom in or out.</p>
+                    </div>
+                </div>
 
-            <div class="space-y-4 sm:space-y-5">
-                <div class="flex gap-4 p-3 sm:p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
-                    <div class="bg-amber-400/20 text-amber-400 h-8 w-8 sm:h-10 sm:w-10 rounded-full flex items-center justify-center font-bold shrink-0 text-sm sm:text-base">1</div>
-                    <p id="step1" class="text-slate-300 text-sm sm:text-base leading-relaxed">Click the <strong>'Select Photo'</strong> button and choose your best photo.</p>
-                </div>
-                <div class="flex gap-4 p-3 sm:p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
-                    <div class="bg-amber-400/20 text-amber-400 h-8 w-8 sm:h-10 sm:w-10 rounded-full flex items-center justify-center font-bold shrink-0 text-sm sm:text-base">2</div>
-                    <p id="step2" class="text-slate-300 text-sm sm:text-base leading-relaxed">Use the slider to <strong>Zoom in/out</strong> and adjust the size.</p>
-                </div>
-                <div class="flex gap-4 p-3 sm:p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
-                    <div class="bg-amber-400/20 text-amber-400 h-8 w-8 sm:h-10 sm:w-10 rounded-full flex items-center justify-center font-bold shrink-0 text-sm sm:text-base">3</div>
-                    <p id="step3" class="text-slate-300 text-sm sm:text-base leading-relaxed"><strong>Drag the photo</strong> on the canvas to place it perfectly inside the frame.</p>
-                </div>
-                <div class="flex gap-4 p-3 sm:p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
-                    <div class="bg-amber-400/20 text-amber-400 h-8 w-8 sm:h-10 sm:w-10 rounded-full flex items-center justify-center font-bold shrink-0 text-sm sm:text-base">4</div>
-                    <p id="step4" class="text-slate-300 text-sm sm:text-base leading-relaxed">Click the <strong>'Download Profile Picture'</strong> button to save your HD picture.</p>
+                <!-- Step 3 -->
+                <div class="flex gap-4 items-start bg-white/5 p-4 md:p-5 rounded-2xl border border-white/5">
+                    <div class="bg-amber-400/20 text-amber-400 w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center shrink-0 font-bold md:text-lg shadow-inner">3</div>
+                    <div>
+                        <h3 id="step3Title" class="text-white font-medium text-lg md:text-xl leading-tight">Download</h3>
+                        <p id="step3Desc" class="text-slate-300 text-sm md:text-base mt-1.5 leading-relaxed">Once everything looks good, tap the 'Download' button to save the picture to your gallery.</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-white/10 text-center">
-                <p id="contactSupportText" class="text-slate-400 text-xs sm:text-sm mb-3 font-medium tracking-wide">Facing any issues? Contact us:</p>
-                
-                <!-- Contact items in ONE inline row -->
-                <div class="flex flex-row flex-wrap justify-center items-center gap-x-4 gap-y-2 text-xs sm:text-sm font-medium">
-                    <a href="tel:+8801743894562" class="text-amber-400 hover:text-amber-300 transition-colors flex items-center gap-1.5 bg-white/5 px-3 py-2 rounded-xl border border-white/5 whitespace-nowrap">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+            <div class="mt-8 pt-6 border-t border-white/10 text-center">
+                <p id="contactSupportText" class="text-slate-300 text-sm md:text-base mb-4 font-medium">Facing any issues? Contact us:</p>
+                <div class="flex flex-row gap-2 md:gap-4 items-center justify-center text-xs sm:text-sm md:text-base font-medium">
+                    <a href="tel:+8801743894562" class="text-amber-400 hover:text-amber-300 transition-colors flex items-center gap-1.5 md:gap-2 bg-white/5 px-3 py-2 md:px-4 md:py-3 rounded-xl border border-white/5 flex-1 justify-center whitespace-nowrap">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
                         +880 1743 894562
                     </a>
-                    <a href="mailto:nazks.org@gmail.com" class="text-amber-400 hover:text-amber-300 transition-colors flex items-center gap-1.5 bg-white/5 px-3 py-2 rounded-xl border border-white/5 whitespace-nowrap">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-                        nazks.org@gmail.com
+                    <a href="mailto:nazks.org@gmail.com" class="text-amber-400 hover:text-amber-300 transition-colors flex items-center gap-1.5 md:gap-2 bg-white/5 px-3 py-2 md:px-4 md:py-3 rounded-xl border border-white/5 flex-1 justify-center whitespace-nowrap">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                        Email Us
                     </a>
                 </div>
             </div>
 
-            <button onclick="closeHelpModal()" id="closeBtnText" class="mt-6 sm:mt-8 w-full bg-gradient-to-r from-amber-500/20 to-yellow-400/20 hover:from-amber-500/30 hover:to-yellow-400/30 border border-amber-400/30 text-amber-300 py-3 sm:py-4 rounded-xl font-medium sm:text-lg transition-all active:scale-95 shadow-lg">Got it!</button>
+            <button onclick="closeHelpModal()" id="closeBtnText" class="mt-8 w-full bg-gradient-to-r from-amber-500/20 to-yellow-400/20 hover:from-amber-500/30 hover:to-yellow-400/30 border border-amber-400/30 text-amber-300 py-3 md:py-4 rounded-xl font-medium md:text-lg transition-all active:scale-95">Got it!</button>
         </div>
     </div>
 
     <!-- Toast Notification Container -->
-    <div id="toast-container" class="fixed bottom-4 right-4 z-50 flex flex-col gap-2"></div>
+    <div id="toast-container"></div>
 
-    <header class="text-center mb-6 sm:mb-8 max-w-lg md:max-w-2xl w-full relative z-10 flex flex-col items-center mt-12 sm:mt-8 md:mt-4">
-        <div class="inline-flex items-center justify-center mb-3 px-4 py-1.5 rounded-full glass-panel border-white/20 shadow-lg">
+    <!-- Responsive Header -->
+    <header class="text-center mb-6 md:mb-10 max-w-lg md:max-w-2xl w-full relative z-10 flex flex-col items-center mt-14 sm:mt-8 md:mt-0">
+        <div class="inline-flex items-center justify-center mb-3 md:mb-4 px-4 py-1.5 md:px-5 md:py-2 rounded-full glass-panel border-white/20 shadow-lg">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5 text-amber-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
             <span id="badgeText" class="text-amber-300 text-xs md:text-sm font-semibold tracking-widest uppercase">Eid Mubarak</span>
         </div>
-        <h1 id="mainTitle" class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight drop-shadow-md mb-3 lg:mb-4 transition-all text-center">
+        <h1 id="mainTitle" class="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight drop-shadow-md mb-3 md:mb-4">
             Eid Ul Adha DP Maker
         </h1>
-        <p id="subTitle" class="text-slate-300 text-xs sm:text-sm md:text-base lg:text-lg font-light max-w-[16rem] sm:max-w-sm md:max-w-md lg:max-w-lg transition-all text-center">
+        <p id="subTitle" class="text-slate-300 text-sm sm:text-base md:text-lg font-light max-w-sm md:max-w-lg px-4">
             Create a beautiful, personalized profile picture for Eid in seconds.
         </p>
     </header>
 
-    <main class="glass-panel rounded-3xl w-[95%] sm:w-full sm:max-w-md md:max-w-lg lg:max-w-xl overflow-hidden relative z-10 flex flex-col shadow-2xl border border-white/10 transition-all duration-300">
+    <!-- App Container (Responsive sizing) -->
+    <main class="glass-panel rounded-2xl md:rounded-3xl w-full max-w-[95%] sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto overflow-hidden relative z-10 flex flex-col shadow-2xl border border-white/10 transition-all duration-300">
         
-        <!-- Canvas Area -->
         <div class="relative w-full aspect-square canvas-bg cursor-move overflow-hidden group">
+            
             <canvas id="editorCanvas" class="w-full h-full object-contain touch-none relative z-10"></canvas>
             
             <div id="uploadPrompt" class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none transition-opacity duration-500 z-20 bg-slate-900/40 backdrop-blur-[2px]">
-                <div class="glass-panel p-4 md:p-6 rounded-full mb-3 md:mb-4 shadow-[0_0_30px_rgba(251,191,36,0.15)] border border-white/20 animate-[pulse_3s_ease-in-out_infinite]">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 md:h-12 md:w-12 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div class="glass-panel p-5 md:p-6 rounded-full mb-4 shadow-[0_0_30px_rgba(251,191,36,0.15)] border border-white/20 animate-[pulse_3s_ease-in-out_infinite]">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 md:h-12 md:w-12 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                     </svg>
                 </div>
-                <h3 id="uploadTitle" class="text-base sm:text-lg md:text-xl font-medium text-white tracking-wide drop-shadow-md mb-1">Upload your photo</h3>
-                <p id="uploadDesc" class="text-xs sm:text-sm md:text-base text-slate-300">Tap the button below to start</p>
+                <h3 id="uploadTitle" class="text-lg md:text-xl font-medium text-white tracking-wide drop-shadow-md mb-1">Upload your photo</h3>
+                <p id="uploadDesc" class="text-sm md:text-base text-slate-300">Tap the button below to start</p>
+            </div>
+            
+            <div id="loadingIndicator" class="absolute inset-0 bg-slate-900/80 backdrop-blur-md z-30 hidden flex flex-col items-center justify-center transition-opacity">
+                <div class="relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center mb-4">
+                    <div class="absolute inset-0 rounded-full border-t-2 border-amber-400 animate-spin"></div>
+                    <div class="absolute inset-2 rounded-full border-r-2 border-white/50 animate-[spin_1.5s_linear_infinite_reverse]"></div>
+                </div>
+                <p id="loadingText" class="text-amber-300 text-xs md:text-sm font-semibold tracking-widest uppercase animate-pulse">Processing Image...</p>
             </div>
 
-            <!-- Loader -->
-            <div id="loadingIndicator" class="absolute inset-0 bg-slate-900/80 backdrop-blur-sm z-30 hidden flex items-center justify-center">
-                <svg class="animate-spin h-10 w-10 text-amber-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-            </div>
-
-            <div id="frameWarning" class="absolute top-4 left-4 right-4 glass-panel !bg-red-500/10 !border-red-500/30 text-red-100 text-xs p-4 rounded-2xl hidden flex items-start gap-3 z-40 backdrop-blur-md shadow-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-400 shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" /></svg>
+            <div id="frameWarning" class="absolute top-4 left-4 right-4 glass-panel !bg-red-500/10 !border-red-500/30 text-red-100 text-xs md:text-sm p-4 rounded-2xl hidden flex items-start gap-3 z-40 backdrop-blur-md shadow-lg">
+                <div class="bg-red-500/20 p-1.5 md:p-2 rounded-lg shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                </div>
                 <div>
-                    <strong id="errorTitle" class="block font-semibold text-sm mb-1 text-red-300">Asset Error</strong>
-                    <span id="errorDesc" class="opacity-90 leading-relaxed">We couldn't find <code class="bg-black/30 px-1 py-0.5 rounded text-white font-mono">SS.png</code>. Please ensure the frame overlay image is placed in the same folder.</span>
+                    <strong id="errorTitle" class="block font-semibold text-sm md:text-base mb-1 text-red-300">Asset Error</strong>
+                    <span id="errorDesc" class="opacity-90 leading-relaxed">We couldn't find <code class="bg-black/30 px-1 py-0.5 rounded text-white font-mono">SS.png</code>. Please ensure the frame overlay image is placed in the same folder as this file.</span>
                 </div>
             </div>
         </div>
 
-        <div class="p-5 sm:p-6 md:p-8 lg:p-10 space-y-5 sm:space-y-6 md:space-y-8 bg-gradient-to-b from-transparent to-black/20">
+        <div class="p-5 sm:p-6 md:p-8 space-y-5 md:space-y-6 bg-gradient-to-b from-transparent to-black/20">
             
             <div>
                 <input type="file" id="imageInput" accept="image/png, image/jpeg, image/jpg" class="hidden">
                 <button onclick="document.getElementById('imageInput').click()" 
-                    class="glass-interactive w-full flex items-center justify-center gap-2 sm:gap-3 glass-panel text-white px-5 py-3.5 sm:px-6 sm:py-4 md:py-5 rounded-2xl font-medium text-sm sm:text-base md:text-lg shadow-lg group relative overflow-hidden focus:outline-none focus:ring-2 focus:ring-amber-400/50 cursor-pointer">
+                    class="glass-interactive w-full flex items-center justify-center gap-3 glass-panel text-white px-4 py-3 md:px-6 md:py-4 rounded-xl md:rounded-2xl font-medium text-sm md:text-base shadow-lg group relative overflow-hidden focus:outline-none focus:ring-2 focus:ring-amber-400/50">
                     <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-amber-400 group-hover:-translate-y-1 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6 text-amber-400 group-hover:-translate-y-1 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
                     <span id="selectBtnText">Select Photo</span>
                 </button>
             </div>
 
-            <div id="controlsPanel" class="opacity-30 pointer-events-none transition-all duration-500 ease-out space-y-5 sm:space-y-6 translate-y-4">
+            <div id="controlsPanel" class="opacity-30 pointer-events-none transition-all duration-500 ease-out space-y-5 md:space-y-6 translate-y-4">
                 
-                <div class="space-y-3 sm:space-y-4">
-                    <div class="flex justify-between items-center">
-                        <label for="zoomSlider" class="flex items-center gap-2 text-[10px] sm:text-xs md:text-sm font-semibold text-slate-300 uppercase tracking-widest cursor-pointer">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-4 sm:w-4 text-amber-400/70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                <div class="space-y-3 md:space-y-4">
+                    <div class="flex justify-between items-center px-1">
+                        <label for="zoomSlider" class="flex items-center gap-2 text-xs md:text-sm font-semibold text-slate-300 uppercase tracking-widest cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5 text-amber-400/70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
                             <span id="adjustText">Adjust Size</span>
                         </label>
-                        <span id="zoomValue" class="glass-panel px-2 py-1 sm:px-3 sm:py-1 rounded-lg text-amber-300 font-mono text-xs sm:text-sm md:text-base shadow-inner">100%</span>
+                        <span id="zoomValue" class="glass-panel px-3 py-1 rounded-lg text-amber-300 font-mono text-xs md:text-sm shadow-inner">100%</span>
                     </div>
-                    <div class="px-1 sm:px-2">
-                        <input type="range" id="zoomSlider" min="0.1" max="3" step="0.01" value="1" class="w-full focus:outline-none md:h-2">
+                    <div class="px-2">
+                        <input type="range" id="zoomSlider" min="0.1" max="3" step="0.01" value="1" class="w-full focus:outline-none">
                     </div>
                 </div>
 
-                <div class="glass-panel !bg-amber-500/5 !border-amber-500/10 p-3 sm:p-4 rounded-xl text-xs sm:text-sm md:text-base text-slate-300 text-center flex items-center justify-center gap-2 sm:gap-3 shadow-inner">
-                    <div class="bg-white/5 p-1.5 sm:p-2 rounded-lg shrink-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M19 9l3 3-3 3M9 19l3 3-3 3M2 12h20M12 2v20"/></svg>
+                <div class="glass-panel !bg-amber-500/5 !border-amber-500/10 p-3 md:p-4 rounded-xl text-xs md:text-sm text-slate-300 text-center flex items-center justify-center gap-3 shadow-inner">
+                    <div class="bg-white/5 p-1.5 md:p-2 rounded-lg shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M19 9l3 3-3 3M9 19l3 3-3 3M2 12h20M12 2v20"/></svg>
                     </div>
                     <p id="dragText" class="text-left leading-tight">Drag your photo on the canvas above to reposition it perfectly.</p>
                 </div>
             </div>
 
             <button id="downloadBtn" disabled 
-                class="w-full bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 disabled:opacity-40 disabled:grayscale disabled:cursor-not-allowed text-slate-900 py-3.5 sm:py-4 md:py-5 px-5 sm:px-6 rounded-2xl font-bold text-sm sm:text-base md:text-lg shadow-[0_0_20px_rgba(251,191,36,0.2)] hover:shadow-[0_0_30px_rgba(251,191,36,0.4)] flex items-center justify-center gap-2 transition-all duration-300 transform active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-amber-500/30">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                class="w-full bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 disabled:opacity-40 disabled:grayscale disabled:cursor-not-allowed text-slate-900 py-3.5 px-4 md:py-4 md:px-6 rounded-xl md:rounded-2xl font-bold text-sm md:text-base shadow-[0_0_20px_rgba(251,191,36,0.2)] hover:shadow-[0_0_30px_rgba(251,191,36,0.4)] flex items-center justify-center gap-2 transition-all duration-300 transform active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-amber-500/30">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
                 <span id="downloadBtnText">Download Profile Picture</span>
             </button>
         </div>
     </main>
 
-    <footer class="mt-8 text-center relative z-10 pb-8 flex flex-col items-center">
-        <a href="https://www.facebook.com/mastercreation.official" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center gap-1 cursor-pointer">
-            <span class="text-slate-400/60 text-[10px] sm:text-xs">Developed by</span>
-            <span id="footerText" class="tracking-[0.2em] sm:tracking-[0.3em] uppercase font-bold text-amber-500/70 group-hover:text-amber-400 transition-colors text-xs sm:text-sm shadow-sm drop-shadow-md">Master Creation</span>
-        </a>
+    <footer class="mt-8 md:mt-12 text-center text-slate-400/60 text-xs md:text-sm relative z-10 flex flex-col items-center gap-2 pb-8">
+        <a href="https://www.facebook.com/mastercreation.official" target="_blank" rel="noopener noreferrer" id="footerText" class="tracking-widest uppercase font-semibold text-amber-500/60 hover:text-amber-400 transition-colors cursor-pointer md:text-base">Master Creation</a>
     </footer>
 
     <script>
-        // --- Configuration & Setup ---
-        const CANVAS_SIZE = 2160; // 4K Resolution for crisp output
+        const CANVAS_SIZE = 2160; // 4K Square Resolution
         const canvas = document.getElementById('editorCanvas');
         const ctx = canvas.getContext('2d');
+        
+        // High resolution for crisp export
         canvas.width = CANVAS_SIZE;
         canvas.height = CANVAS_SIZE;
-        // High quality smoothing for clear images
+        
+        // Ensure high quality image scaling
         ctx.imageSmoothingEnabled = true;
         ctx.imageSmoothingQuality = 'high';
 
-        // --- Translations ---
-        const translations = {
-            en: {
-                mainTitle: "Eid Ul Adha DP Maker",
-                subTitle: "Create a beautiful, personalized profile picture for Eid in seconds.",
-                badgeText: "Eid Mubarak",
-                helpBtn: "Help",
-                uploadTitle: "Upload your photo",
-                uploadDesc: "Tap the button below to start",
-                selectBtnText: "Select Photo",
-                adjustText: "Adjust Size",
-                dragText: "Drag your photo on the canvas above to reposition it perfectly.",
-                downloadBtnText: "Download Profile Picture",
-                errorTitle: "Asset Error",
-                errorDesc: "We couldn't find <code class='bg-black/30 px-1 py-0.5 rounded text-white font-mono'>SS.png</code>. Please ensure the frame overlay image is placed in the same folder.",
-                toastSelectPhoto: "Please select a photo first!",
-                toastDownloading: "Downloading your HD Profile Picture...",
-                toastError: "Local file download blocked by browser. Please host this folder on a website (Live Server, cPanel) to download.",
-                helpTitle: "How to use",
-                step1: "Click the <strong>'Select Photo'</strong> button and choose your best photo.",
-                step2: "Use the slider to <strong>Zoom in/out</strong> and adjust the size.",
-                step3: "<strong>Drag the photo</strong> on the canvas to place it perfectly inside the frame.",
-                step4: "Click the <strong>'Download Profile Picture'</strong> button to save your HD picture.",
-                contactSupportText: "Facing any issues? Contact us:",
-                closeBtnText: "Got it!"
-            },
-            bn: {
-                mainTitle: "ঈদুল আযহা ডিপি মেকার",
-                subTitle: "কয়েক সেকেন্ডেই তৈরি করুন আপনার ঈদের সুন্দর প্রোফাইল পিকচার।",
-                badgeText: "ঈদ মোবারক",
-                helpBtn: "সাহায্য",
-                uploadTitle: "আপনার ছবি আপলোড করুন",
-                uploadDesc: "শুরু করতে নিচের বাটনে চাপ দিন",
-                selectBtnText: "ছবি নির্বাচন করুন",
-                adjustText: "সাইজ ঠিক করুন",
-                dragText: "ছবিটি ফ্রেমের ঠিক জায়গায় বসাতে ক্যানভাসের ওপর ড্র্যাগ করুন (টেনে আনুন)।",
-                downloadBtnText: "ডিপি ডাউনলোড করুন",
-                errorTitle: "ফাইল পাওয়া যায়নি",
-                errorDesc: "আমরা <code class='bg-black/30 px-1 py-0.5 rounded text-white font-mono'>SS.png</code> ফাইলটি খুঁজে পাইনি। ফ্রেমের ছবিটি এই ফাইলের একই ফোল্ডারে রাখুন।",
-                toastSelectPhoto: "অনুগ্রহ করে প্রথমে একটি ছবি নির্বাচন করুন!",
-                toastDownloading: "আপনার HD ডিপি ডাউনলোড হচ্ছে...",
-                toastError: "লোকাল ফোল্ডার থেকে ডাউনলোড করা সম্ভব হচ্ছে না। براہ مہربانی इसे ওয়েবসাইটে বা Live Server এ রান করুন।",
-                helpTitle: "কীভাবে ব্যবহার করবেন",
-                step1: "<strong>'ছবি নির্বাচন করুন'</strong> বাটনে ক্লিক করে আপনার সুন্দর একটি ছবি সিলেক্ট করুন।",
-                step2: "স্লাইডারটি টেনে ছবির সাইজ <strong>ছোট/বড় (Zoom)</strong> করে ঠিক করে নিন।",
-                step3: "ফ্রেমের ভেতর ছবিটি সুন্দরভাবে বসাতে ক্যানভাসের ওপর ছবিটি <strong>টেনে (Drag)</strong> সঠিক জায়গায় আনুন।",
-                step4: "এইচডি (HD) কোয়ালিটিতে ছবি সেভ করতে <strong>'ডিপি ডাউনলোড করুন'</strong> বাটনে ক্লিক করুন।",
-                contactSupportText: "কোনো সমস্যা হচ্ছে? যোগাযোগ করুন:",
-                closeBtnText: "বুঝতে পেরেছি!"
-            }
-        };
-
-        let currentLang = 'en';
-
+        // Application State
         const state = {
             userImg: null,
             frameImg: null,
             scale: 1,
+            baseScale: 1,
             pan: {x: 0, y: 0},
-            drag: {active: false, x: 0, y: 0}
+            drag: {active: false, x: 0, y: 0},
+            currentLang: 'en'
         };
 
-        // --- Initialization ---
+        const translations = {
+            en: {
+                badgeText: "Eid Mubarak",
+                mainTitle: "Eid Ul Adha DP Maker",
+                subTitle: "Create a beautiful, personalized profile picture for Eid in seconds.",
+                uploadTitle: "Upload your photo",
+                uploadDesc: "Tap the button below to start",
+                loadingText: "Processing Image...",
+                errorTitle: "Asset Error",
+                errorDesc: 'We couldn\'t find <code class="bg-black/30 px-1 py-0.5 rounded text-white font-mono">SS.png</code>. Please ensure the frame overlay image is placed in the same folder as this file.',
+                selectBtnText: "Select Photo",
+                adjustText: "Adjust Size",
+                dragText: "Drag your photo on the canvas above to reposition it perfectly.",
+                downloadBtnText: "Download Profile Picture",
+                footerText: "Master Creation",
+                langBtnText: "বাংলা",
+                alertError: "Could not download image locally due to browser security. Please upload this file to a server/website to enable downloading.",
+                placeholderFrame: "FRAME OVERLAY",
+                placeholderDesc: "Looking for SS.png",
+                
+                // Help Modal Translation
+                helpBtnText: "Help",
+                helpTitle: "How to use",
+                step1Title: "Select Photo",
+                step1Desc: "Tap 'Select Photo' to choose an image from your device.",
+                step2Title: "Adjust Position",
+                step2Desc: "Drag the image on the canvas to position it perfectly. Use the slider to zoom in or out.",
+                step3Title: "Download",
+                step3Desc: "Once everything looks good, tap the 'Download' button to save the picture to your gallery.",
+                closeBtnText: "Got it!",
+                contactSupportText: "Facing any issues? Contact us:"
+            },
+            bn: {
+                badgeText: "ঈদ মোবারক",
+                mainTitle: "ঈদুল আযহা ডিপি মেকার",
+                subTitle: "মুহূর্তের মধ্যে ঈদের জন্য একটি সুন্দর, কাস্টমাইজড প্রোফাইল ছবি তৈরি করুন।",
+                uploadTitle: "আপনার ছবি আপলোড করুন",
+                uploadDesc: "শুরু করতে নিচের বাটনে ট্যাপ করুন",
+                loadingText: "প্রসেস করা হচ্ছে...",
+                errorTitle: "অ্যাসেট ত্রুটি",
+                errorDesc: 'আমরা <code class="bg-black/30 px-1 py-0.5 rounded text-white font-mono">SS.png</code> খুঁজে পাইনি। নিশ্চিত করুন ফ্রেম ছবিটি একই ফোল্ডারে আছে।',
+                selectBtnText: "ছবি নির্বাচন করুন",
+                adjustText: "আকার পরিবর্তন",
+                dragText: "আপনার ছবিটিকে নিখুঁতভাবে বসানোর জন্য উপরের ক্যানভাসে টেনে আনুন।",
+                downloadBtnText: "ডিপি ডাউনলোড করুন",
+                footerText: "Master Creation",
+                langBtnText: "English",
+                alertError: "ব্রাউজার সিকিউরিটির কারণে সরাসরি ডাউনলোড ব্লক হয়েছে। এটি অনলাইনে আপলোড করলে সঠিকভাবে কাজ করবে।",
+                placeholderFrame: "ফ্রেম ওভারলে",
+                placeholderDesc: "SS.png খুঁজছি",
+
+                // Help Modal Translation
+                helpBtnText: "সাহায্য",
+                helpTitle: "ব্যবহার বিধি",
+                step1Title: "ছবি নির্বাচন করুন",
+                step1Desc: "'ছবি নির্বাচন করুন' বাটনে ট্যাপ করে আপনার ফোন বা পিসি থেকে একটি ছবি বাছুন।",
+                step2Title: "পজিশন ঠিক করুন",
+                step2Desc: "ক্যানভাসের উপর ছবিটি টেনে আপনার পছন্দমতো জায়গায় বসান। ছোট-বড় করতে স্লাইডার ব্যবহার করুন।",
+                step3Title: "ডাউনলোড করুন",
+                step3Desc: "সবকিছু ঠিকঠাক থাকলে নিচের 'ডিপি ডাউনলোড করুন' বাটনে ক্লিক করে ছবিটি সেভ করে নিন।",
+                closeBtnText: "বুঝতে পেরেছি!",
+                contactSupportText: "কোনো সমস্যা হচ্ছে? যোগাযোগ করুন:"
+            }
+        };
+
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerText = message;
+            container.appendChild(toast);
+            
+            setTimeout(() => toast.classList.add('show'), 10);
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        function openHelpModal() {
+            const modal = document.getElementById('helpModal');
+            const content = document.getElementById('helpModalContent');
+            modal.classList.remove('hidden');
+            void modal.offsetWidth;
+            content.classList.remove('scale-95', 'opacity-0');
+            content.classList.add('scale-100', 'opacity-100');
+        }
+
+        function closeHelpModal() {
+            const modal = document.getElementById('helpModal');
+            const content = document.getElementById('helpModalContent');
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        function updateLanguageUI() {
+            const t = translations[state.currentLang];
+            
+            document.getElementById('badgeText').innerText = t.badgeText;
+            document.getElementById('mainTitle').innerText = t.mainTitle;
+            document.getElementById('subTitle').innerText = t.subTitle;
+            document.getElementById('uploadTitle').innerText = t.uploadTitle;
+            document.getElementById('uploadDesc').innerText = t.uploadDesc;
+            document.getElementById('loadingText').innerText = t.loadingText;
+            document.getElementById('errorTitle').innerText = t.errorTitle;
+            document.getElementById('errorDesc').innerHTML = t.errorDesc;
+            document.getElementById('selectBtnText').innerText = t.selectBtnText;
+            document.getElementById('adjustText').innerText = t.adjustText;
+            document.getElementById('dragText').innerText = t.dragText;
+            document.getElementById('downloadBtnText').innerText = t.downloadBtnText;
+            document.getElementById('footerText').innerHTML = t.footerText;
+            document.getElementById('langBtnText').innerText = t.langBtnText;
+
+            document.getElementById('helpBtnText').innerText = t.helpBtnText;
+            document.getElementById('helpTitle').innerText = t.helpTitle;
+            document.getElementById('step1Title').innerText = t.step1Title;
+            document.getElementById('step1Desc').innerText = t.step1Desc;
+            document.getElementById('step2Title').innerText = t.step2Title;
+            document.getElementById('step2Desc').innerText = t.step2Desc;
+            document.getElementById('step3Title').innerText = t.step3Title;
+            document.getElementById('step3Desc').innerText = t.step3Desc;
+            document.getElementById('closeBtnText').innerText = t.closeBtnText;
+            document.getElementById('contactSupportText').innerText = t.contactSupportText;
+
+            if(state.currentLang === 'bn') {
+                document.body.classList.add('lang-bn');
+            } else {
+                document.body.classList.remove('lang-bn');
+            }
+
+            if(!state.frameImg && !state.userImg) {
+                drawPlaceholder();
+            }
+        }
+
+        document.getElementById('langToggleBtn').addEventListener('click', () => {
+            state.currentLang = state.currentLang === 'en' ? 'bn' : 'en';
+            updateLanguageUI();
+        });
+
+        function drawPlaceholder() {
+            ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+            ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
+            ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+            
+            ctx.lineWidth = 10;
+            ctx.strokeStyle = "rgba(251, 191, 36, 0.3)";
+            ctx.strokeRect(10, 10, CANVAS_SIZE - 20, CANVAS_SIZE - 20);
+
+            const t = translations[state.currentLang];
+            ctx.font = `bold 48px ${state.currentLang === 'bn' ? "'Hind Siliguri'" : "'Outfit'"}, sans-serif`;
+            ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
+            ctx.textAlign = "center";
+            ctx.fillText(t.placeholderFrame, CANVAS_SIZE/2, CANVAS_SIZE/2 - 20);
+            
+            ctx.font = `300 24px ${state.currentLang === 'bn' ? "'Hind Siliguri'" : "'Outfit'"}, sans-serif`;
+            ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+            ctx.fillText(t.placeholderDesc, CANVAS_SIZE/2, CANVAS_SIZE/2 + 30);
+        }
+
         window.onload = function() {
             const frame = new Image();
-            frame.crossOrigin = "anonymous"; // Helps prevent tainted canvas on web servers
+            frame.crossOrigin = "anonymous";
             frame.src = "SS.png"; 
             
             frame.onload = function() {
@@ -377,123 +544,46 @@
             };
 
             frame.onerror = function() {
-                console.warn("SS.png not found");
+                console.warn("Frame image (SS.png) not found.");
                 document.getElementById('frameWarning').classList.remove('hidden');
-                ctx.font = "60px Inter, sans-serif";
-                ctx.fillStyle = "rgba(255,255,255,0.5)";
-                ctx.textAlign = "center";
-                ctx.fillText("Frame (SS.png) Missing", CANVAS_SIZE/2, CANVAS_SIZE/2);
+                drawPlaceholder();
             };
         };
 
-        function toggleLanguage() {
-            currentLang = currentLang === 'en' ? 'bn' : 'en';
-            const btn = document.getElementById('langToggleBtn');
-            btn.innerHTML = currentLang === 'en' 
-                ? '<span class="text-amber-400 font-bold uppercase tracking-wider text-xs sm:text-sm">BN</span>' 
-                : '<span class="text-amber-400 font-bold uppercase tracking-wider text-xs sm:text-sm">EN</span>';
-            
-            if (currentLang === 'bn') {
-                document.body.classList.add('font-bengali');
-            } else {
-                document.body.classList.remove('font-bengali');
-            }
-            updateUI();
-        }
-
-        function updateUI() {
-            const t = translations[currentLang];
-            document.getElementById('mainTitle').innerText = t.mainTitle;
-            document.getElementById('subTitle').innerText = t.subTitle;
-            document.getElementById('badgeText').innerText = t.badgeText;
-            document.getElementById('helpBtnText').innerText = t.helpBtn;
-            document.getElementById('uploadTitle').innerText = t.uploadTitle;
-            document.getElementById('uploadDesc').innerText = t.uploadDesc;
-            document.getElementById('selectBtnText').innerText = t.selectBtnText;
-            document.getElementById('adjustText').innerText = t.adjustText;
-            document.getElementById('dragText').innerText = t.dragText;
-            document.getElementById('downloadBtnText').innerText = t.downloadBtnText;
-            document.getElementById('errorTitle').innerText = t.errorTitle;
-            document.getElementById('errorDesc').innerHTML = t.errorDesc;
-            document.getElementById('helpTitle').innerText = t.helpTitle;
-            document.getElementById('step1').innerHTML = t.step1;
-            document.getElementById('step2').innerHTML = t.step2;
-            document.getElementById('step3').innerHTML = t.step3;
-            document.getElementById('step4').innerHTML = t.step4;
-            document.getElementById('contactSupportText').innerText = t.contactSupportText;
-            document.getElementById('closeBtnText').innerText = t.closeBtnText;
-        }
-
-        function showToast(message, isError = false) {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            
-            toast.className = `flex items-center gap-3 px-4 py-3 rounded-xl shadow-2xl border backdrop-blur-md transform transition-all duration-300 translate-y-full opacity-0 max-w-sm w-full ${
-                isError 
-                ? 'bg-red-900/80 border-red-500/50 text-red-100' 
-                : 'bg-emerald-900/80 border-emerald-500/50 text-emerald-100'
-            }`;
-
-            const icon = isError 
-                ? `<svg class="w-5 h-5 text-red-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`
-                : `<svg class="w-5 h-5 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`;
-
-            toast.innerHTML = `${icon}<p class="text-sm font-medium tracking-wide leading-snug">${message}</p>`;
-            container.appendChild(toast);
-
-            // Animate in
-            setTimeout(() => {
-                toast.classList.remove('translate-y-full', 'opacity-0');
-            }, 10);
-
-            // Animate out
-            setTimeout(() => {
-                toast.classList.add('translate-y-full', 'opacity-0');
-                setTimeout(() => toast.remove(), 300);
-            }, 4000); // 4 seconds duration
-        }
-
-        // --- Modal Functions ---
-        function openHelpModal() {
-            const modal = document.getElementById('helpModal');
-            const content = document.getElementById('helpModalContent');
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                modal.classList.remove('opacity-0');
-                content.classList.remove('scale-95', 'opacity-0');
-            }, 10);
-        }
-
-        function closeHelpModal() {
-            const modal = document.getElementById('helpModal');
-            const content = document.getElementById('helpModalContent');
-            modal.classList.add('opacity-0');
-            content.classList.add('scale-95', 'opacity-0');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-            }, 300);
-        }
-
-        // --- Core App Logic ---
         document.getElementById('imageInput').addEventListener('change', (e) => {
             const file = e.target.files[0];
             if(!file) return;
             
-            document.getElementById('loadingIndicator').classList.remove('hidden');
+            const loader = document.getElementById('loadingIndicator');
+            loader.classList.remove('hidden');
             
             const reader = new FileReader();
             reader.onload = (evt) => {
                 const img = new Image();
                 img.onload = () => {
                     state.userImg = img;
-                    const scale = Math.max(CANVAS_SIZE/img.width, CANVAS_SIZE/img.height);
+                    
+                    const scaleX = CANVAS_SIZE / img.width;
+                    const scaleY = CANVAS_SIZE / img.height;
+                    const scale = Math.max(scaleX, scaleY);
+                    
+                    state.baseScale = scale;
                     state.scale = scale;
                     state.pan = {x: 0, y: 0};
                     
-                    document.getElementById('controlsPanel').classList.remove('opacity-30', 'pointer-events-none', 'translate-y-4');
-                    document.getElementById('uploadPrompt').classList.add('opacity-0');
+                    const slider = document.getElementById('zoomSlider');
+                    slider.min = scale * 0.5; 
+                    slider.max = scale * 4;   
+                    slider.value = scale;
+                    
+                    const controls = document.getElementById('controlsPanel');
+                    controls.classList.remove('opacity-30', 'pointer-events-none', 'translate-y-4');
+                    controls.classList.add('opacity-100', 'translate-y-0');
+                    
+                    document.getElementById('uploadPrompt').style.opacity = '0';
                     document.getElementById('downloadBtn').disabled = false;
-                    document.getElementById('loadingIndicator').classList.add('hidden');
+                    
+                    setTimeout(() => { loader.classList.add('hidden'); }, 400);
                     
                     updateZoomUI();
                     draw();
@@ -508,10 +598,13 @@
             
             if (state.userImg) {
                 ctx.save();
-                ctx.translate(CANVAS_SIZE/2 + state.pan.x, CANVAS_SIZE/2 + state.pan.y);
+                ctx.translate(CANVAS_SIZE/2, CANVAS_SIZE/2);
+                ctx.translate(state.pan.x, state.pan.y);
                 ctx.scale(state.scale, state.scale);
                 ctx.drawImage(state.userImg, -state.userImg.width/2, -state.userImg.height/2);
                 ctx.restore();
+            } else if (!state.frameImg) {
+                drawPlaceholder();
             }
 
             if (state.frameImg) {
@@ -519,40 +612,52 @@
             }
         }
 
-        // --- Interaction Handling ---
         const getPos = (e) => {
             const rect = canvas.getBoundingClientRect();
             const clientX = e.touches ? e.touches[0].clientX : e.clientX;
             const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+
             return {
-                x: (clientX - rect.left) * (CANVAS_SIZE/rect.width),
-                y: (clientY - rect.top) * (CANVAS_SIZE/rect.height)
+                x: (clientX - rect.left) * scaleX,
+                y: (clientY - rect.top) * scaleY
             };
         };
 
         const startDrag = (e) => {
             if(!state.userImg) return;
-            e.preventDefault();
+            if(e.type === 'touchstart') e.preventDefault(); 
+            
             state.drag.active = true;
+            canvas.style.cursor = 'grabbing';
             const pos = getPos(e);
+            
             state.drag.x = pos.x - state.pan.x;
             state.drag.y = pos.y - state.pan.y;
         };
 
         const onDrag = (e) => {
             if (!state.drag.active) return;
-            e.preventDefault();
+            if(e.type === 'touchmove') e.preventDefault();
+
             const pos = getPos(e);
             state.pan.x = pos.x - state.drag.x;
             state.pan.y = pos.y - state.drag.y;
+            
             draw();
         };
 
-        const endDrag = () => state.drag.active = false;
+        const endDrag = () => {
+            state.drag.active = false;
+            canvas.style.cursor = state.userImg ? 'move' : 'default';
+        };
 
         canvas.addEventListener('mousedown', startDrag);
         window.addEventListener('mousemove', onDrag);
         window.addEventListener('mouseup', endDrag);
+        window.addEventListener('mouseleave', endDrag); 
         
         canvas.addEventListener('touchstart', startDrag, {passive: false});
         window.addEventListener('touchmove', onDrag, {passive: false});
@@ -566,27 +671,21 @@
 
         function updateZoomUI() {
             if(!state.userImg) return;
-            const baseScale = Math.max(CANVAS_SIZE/state.userImg.width, CANVAS_SIZE/state.userImg.height);
-            const percentage = Math.round((state.scale / baseScale) * 100);
+            const percentage = Math.round((state.scale / state.baseScale) * 100);
             document.getElementById('zoomValue').innerText = percentage + "%";
         }
 
-        // --- Download Handling ---
         document.getElementById('downloadBtn').addEventListener('click', () => {
-            if(!state.userImg) {
-                showToast(translations[currentLang].toastSelectPhoto, true);
-                return;
-            }
+            if(!state.userImg) return;
             
             try {
-                showToast(translations[currentLang].toastDownloading);
                 const link = document.createElement('a');
-                link.download = `eid-dp-4k-${Date.now()}.png`;
-                link.href = canvas.toDataURL('image/png', 1.0); // 1.0 ensures highest quality png
+                link.download = `Eid-Profile-${Date.now()}.png`;
+                link.href = canvas.toDataURL('image/png', 1.0);
                 link.click();
-            } catch (error) {
-                console.error("Download Error (Likely CORS Tainted Canvas):", error);
-                showToast(translations[currentLang].toastError, true);
+            } catch (err) {
+                console.error("Error generating download:", err);
+                showToast(translations[state.currentLang].alertError);
             }
         });
     </script>
