@@ -32,10 +32,10 @@
             justify-content: center; /* Center app vertically on large screens */
             transition: font-family 0.3s ease;
         }
-        
-        body.lang-bn {
-            font-family: 'Hind Siliguri', sans-serif;
-        }
+
+            body.lang-bn {
+                font-family: 'Hind Siliguri', sans-serif;
+            }
 
         .bg-blob {
             position: absolute;
@@ -45,13 +45,41 @@
             opacity: 0.5;
             animation: float 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .blob-1 { top: -10%; left: -10%; width: 40vw; height: 40vw; background: rgba(56, 189, 248, 0.2); }
-        .blob-2 { bottom: -10%; right: -10%; width: 50vw; height: 50vw; background: rgba(168, 85, 247, 0.15); animation-delay: -10s; }
-        .blob-3 { top: 40%; left: 50%; width: 30vw; height: 30vw; background: rgba(251, 191, 36, 0.1); animation-duration: 25s; }
+
+        .blob-1 {
+            top: -10%;
+            left: -10%;
+            width: 40vw;
+            height: 40vw;
+            background: rgba(56, 189, 248, 0.2);
+        }
+
+        .blob-2 {
+            bottom: -10%;
+            right: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: rgba(168, 85, 247, 0.15);
+            animation-delay: -10s;
+        }
+
+        .blob-3 {
+            top: 40%;
+            left: 50%;
+            width: 30vw;
+            height: 30vw;
+            background: rgba(251, 191, 36, 0.1);
+            animation-duration: 25s;
+        }
 
         @keyframes float {
-            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-            100% { transform: translate(5%, 10%) scale(1.1) rotate(5deg); }
+            0% {
+                transform: translate(0, 0) scale(1) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(5%, 10%) scale(1.1) rotate(5deg);
+            }
         }
 
         .glass-panel {
@@ -65,60 +93,64 @@
         .glass-interactive {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .glass-interactive:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-        .glass-interactive:active {
-            transform: translateY(0);
-        }
+
+            .glass-interactive:hover {
+                background: rgba(255, 255, 255, 0.1);
+                border-color: rgba(255, 255, 255, 0.2);
+                transform: translateY(-2px);
+            }
+
+            .glass-interactive:active {
+                transform: translateY(0);
+            }
 
         .canvas-bg {
-            background-image: 
-                linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%), 
-                linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%), 
-                linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%), 
-                linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%);
+            background-image: linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%), linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%), linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%);
             background-size: 20px 20px;
             background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
             background-color: rgba(0, 0, 0, 0.3);
         }
 
         input[type=range] {
-            -webkit-appearance: none; 
-            background: transparent; 
-            width: 100%;
-        }
-        input[type=range]:focus {
-            outline: none;
-        }
-        input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none;
-            height: 24px;
-            width: 24px;
-            border-radius: 50%;
-            background: var(--accent-gold);
-            cursor: pointer;
-            margin-top: -10px; 
-            box-shadow: 0 0 15px rgba(251, 191, 36, 0.5), inset 0 0 4px rgba(255,255,255,0.8);
-            border: 2px solid #fff;
-            transition: transform 0.1s;
-        }
-        input[type=range]::-webkit-slider-thumb:active {
-            transform: scale(1.15);
-        }
-        input[type=range]::-webkit-slider-runnable-track {
+            background: transparent;
             width: 100%;
-            height: 4px;
-            cursor: pointer;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 2px;
-            border: 1px solid rgba(255,255,255,0.05);
         }
-        
+
+            input[type=range]:focus {
+                outline: none;
+            }
+
+            input[type=range]::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                height: 24px;
+                width: 24px;
+                border-radius: 50%;
+                background: var(--accent-gold);
+                cursor: pointer;
+                margin-top: -10px;
+                box-shadow: 0 0 15px rgba(251, 191, 36, 0.5), inset 0 0 4px rgba(255,255,255,0.8);
+                border: 2px solid #fff;
+                transition: transform 0.1s;
+            }
+
+                input[type=range]::-webkit-slider-thumb:active {
+                    transform: scale(1.15);
+                }
+
+            input[type=range]::-webkit-slider-runnable-track {
+                width: 100%;
+                height: 4px;
+                cursor: pointer;
+                background: rgba(255, 255, 255, 0.15);
+                border-radius: 2px;
+                border: 1px solid rgba(255,255,255,0.05);
+            }
+
         @keyframes shimmer {
-            100% { transform: translateX(100%); }
+            100% {
+                transform: translateX(100%);
+            }
         }
 
         #toast-container {
@@ -132,6 +164,7 @@
             gap: 10px;
             pointer-events: none;
         }
+
         .toast {
             background: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(10px);
@@ -145,26 +178,30 @@
             transform: translateY(20px);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .toast.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
+
+            .toast.show {
+                opacity: 1;
+                transform: translateY(0);
+            }
 
         .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
         }
+
         .custom-scrollbar::-webkit-scrollbar-track {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
             margin-block: 10px;
         }
+
         .custom-scrollbar::-webkit-scrollbar-thumb {
             background: rgba(251, 191, 36, 0.5);
             border-radius: 10px;
         }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: rgba(251, 191, 36, 0.8);
-        }
+
+            .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+                background: rgba(251, 191, 36, 0.8);
+            }
     </style>
 </head>
 <body class="py-6 px-4 sm:px-6 md:py-12 relative w-full">
@@ -189,16 +226,16 @@
     <div id="helpModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
         <!-- Backdrop -->
         <div class="absolute inset-0 bg-slate-900/80 backdrop-blur-sm transition-opacity" onclick="closeHelpModal()"></div>
-        
+
         <!-- Modal Content (Responsive sizes) -->
         <div class="glass-panel p-6 sm:p-8 md:p-10 rounded-2xl md:rounded-3xl w-full max-w-[95%] sm:max-w-md md:max-w-lg lg:max-w-xl relative z-10 transform scale-95 opacity-0 transition-all duration-300 border border-white/20 shadow-2xl max-h-[90vh] overflow-y-auto custom-scrollbar" id="helpModalContent">
-            
+
             <button onclick="closeHelpModal()" class="absolute top-4 right-4 md:top-6 md:right-6 text-slate-400 hover:text-white transition-colors bg-white/5 rounded-full p-1 sticky left-[100%] z-20">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
 
             <h2 id="helpTitle" class="text-2xl md:text-3xl font-bold text-white mb-6 md:mb-8 text-center drop-shadow-sm mt-2">How to use</h2>
-            
+
             <div class="space-y-4 md:space-y-6">
                 <!-- Step 1 -->
                 <div class="flex gap-4 items-start bg-white/5 p-4 md:p-5 rounded-2xl border border-white/5">
@@ -208,7 +245,7 @@
                         <p id="step1Desc" class="text-slate-300 text-sm md:text-base mt-1.5 leading-relaxed">Tap 'Select Photo' to choose an image from your device.</p>
                     </div>
                 </div>
-                
+
                 <!-- Step 2 -->
                 <div class="flex gap-4 items-start bg-white/5 p-4 md:p-5 rounded-2xl border border-white/5">
                     <div class="bg-amber-400/20 text-amber-400 w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center shrink-0 font-bold md:text-lg shadow-inner">2</div>
@@ -265,11 +302,11 @@
 
     <!-- App Container (Responsive sizing) -->
     <main class="glass-panel rounded-2xl md:rounded-3xl w-full max-w-[95%] sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto overflow-hidden relative z-10 flex flex-col shadow-2xl border border-white/10 transition-all duration-300">
-        
+
         <div class="relative w-full aspect-square canvas-bg cursor-move overflow-hidden group">
-            
+
             <canvas id="editorCanvas" class="w-full h-full object-contain touch-none relative z-10"></canvas>
-            
+
             <div id="uploadPrompt" class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none transition-opacity duration-500 z-20 bg-slate-900/40 backdrop-blur-[2px]">
                 <div class="glass-panel p-5 md:p-6 rounded-full mb-4 shadow-[0_0_30px_rgba(251,191,36,0.15)] border border-white/20 animate-[pulse_3s_ease-in-out_infinite]">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 md:h-12 md:w-12 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -279,7 +316,7 @@
                 <h3 id="uploadTitle" class="text-lg md:text-xl font-medium text-white tracking-wide drop-shadow-md mb-1">Upload your photo</h3>
                 <p id="uploadDesc" class="text-sm md:text-base text-slate-300">Tap the button below to start</p>
             </div>
-            
+
             <div id="loadingIndicator" class="absolute inset-0 bg-slate-900/80 backdrop-blur-md z-30 hidden flex flex-col items-center justify-center transition-opacity">
                 <div class="relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center mb-4">
                     <div class="absolute inset-0 rounded-full border-t-2 border-amber-400 animate-spin"></div>
@@ -299,24 +336,36 @@
             </div>
         </div>
 
+        <div class="px-5 sm:px-6 md:px-8 pt-5 md:pt-6 -mb-1 relative z-20">
+            <p id="chooseFrameText" class="text-xs md:text-sm font-semibold text-slate-300 uppercase tracking-widest mb-3">Choose Frame</p>
+            <div class="flex gap-4 overflow-x-auto custom-scrollbar pb-3">
+                <button class="frame-btn w-16 h-16 md:w-20 md:h-20 rounded-xl border-2 border-amber-400 overflow-hidden shrink-0 shadow-lg relative group focus:outline-none transition-all" data-index="0">
+                    <img src="SS.png" class="w-full h-full object-cover bg-white/10 transition-transform group-hover:scale-110" alt="Frame 1" onerror="this.src='https://placehold.co/100x100/1e1b4b/fbbf24?text=1'">
+                </button>
+                <button class="frame-btn w-16 h-16 md:w-20 md:h-20 rounded-xl border-2 border-transparent hover:border-white/30 overflow-hidden shrink-0 shadow-lg relative group transition-all focus:outline-none" data-index="1">
+                    <img src="SS1.PNG" class="w-full h-full object-cover bg-white/10 transition-transform group-hover:scale-110" alt="Frame 2" onerror="this.src='https://placehold.co/100x100/1e1b4b/fbbf24?text=2'">
+                </button>
+            </div>
+        </div>
+
         <div class="p-5 sm:p-6 md:p-8 space-y-5 md:space-y-6 bg-gradient-to-b from-transparent to-black/20">
-            
+
             <div>
                 <input type="file" id="imageInput" accept="image/png, image/jpeg, image/jpg" class="hidden">
-                <button onclick="document.getElementById('imageInput').click()" 
-                    class="glass-interactive w-full flex items-center justify-center gap-3 glass-panel text-white px-4 py-3 md:px-6 md:py-4 rounded-xl md:rounded-2xl font-medium text-sm md:text-base shadow-lg group relative overflow-hidden focus:outline-none focus:ring-2 focus:ring-amber-400/50">
+                <button onclick="document.getElementById('imageInput').click()"
+                        class="glass-interactive w-full flex items-center justify-center gap-3 glass-panel text-white px-4 py-3 md:px-6 md:py-4 rounded-xl md:rounded-2xl font-medium text-sm md:text-base shadow-lg group relative overflow-hidden focus:outline-none focus:ring-2 focus:ring-amber-400/50">
                     <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6 text-amber-400 group-hover:-translate-y-1 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6 text-amber-400 group-hover:-translate-y-1 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" x2="12" y1="3" y2="15" /></svg>
                     <span id="selectBtnText">Select Photo</span>
                 </button>
             </div>
 
             <div id="controlsPanel" class="opacity-30 pointer-events-none transition-all duration-500 ease-out space-y-5 md:space-y-6 translate-y-4">
-                
+
                 <div class="space-y-3 md:space-y-4">
                     <div class="flex justify-between items-center px-1">
                         <label for="zoomSlider" class="flex items-center gap-2 text-xs md:text-sm font-semibold text-slate-300 uppercase tracking-widest cursor-pointer">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5 text-amber-400/70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5 text-amber-400/70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /><line x1="11" y1="8" x2="11" y2="14" /><line x1="8" y1="11" x2="14" y2="11" /></svg>
                             <span id="adjustText">Adjust Size</span>
                         </label>
                         <span id="zoomValue" class="glass-panel px-3 py-1 rounded-lg text-amber-300 font-mono text-xs md:text-sm shadow-inner">100%</span>
@@ -328,15 +377,15 @@
 
                 <div class="glass-panel !bg-amber-500/5 !border-amber-500/10 p-3 md:p-4 rounded-xl text-xs md:text-sm text-slate-300 text-center flex items-center justify-center gap-3 shadow-inner">
                     <div class="bg-white/5 p-1.5 md:p-2 rounded-lg shrink-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M19 9l3 3-3 3M9 19l3 3-3 3M2 12h20M12 2v20"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M19 9l3 3-3 3M9 19l3 3-3 3M2 12h20M12 2v20" /></svg>
                     </div>
                     <p id="dragText" class="text-left leading-tight">Drag your photo on the canvas above to reposition it perfectly.</p>
                 </div>
             </div>
 
-            <button id="downloadBtn" disabled 
-                class="w-full bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 disabled:opacity-40 disabled:grayscale disabled:cursor-not-allowed text-slate-900 py-3.5 px-4 md:py-4 md:px-6 rounded-xl md:rounded-2xl font-bold text-sm md:text-base shadow-[0_0_20px_rgba(251,191,36,0.2)] hover:shadow-[0_0_30px_rgba(251,191,36,0.4)] flex items-center justify-center gap-2 transition-all duration-300 transform active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-amber-500/30">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+            <button id="downloadBtn" disabled
+                    class="w-full bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 disabled:opacity-40 disabled:grayscale disabled:cursor-not-allowed text-slate-900 py-3.5 px-4 md:py-4 md:px-6 rounded-xl md:rounded-2xl font-bold text-sm md:text-base shadow-[0_0_20px_rgba(251,191,36,0.2)] hover:shadow-[0_0_30px_rgba(251,191,36,0.4)] flex items-center justify-center gap-2 transition-all duration-300 transform active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-amber-500/30">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>
                 <span id="downloadBtnText">Download Profile Picture</span>
             </button>
         </div>
@@ -350,11 +399,11 @@
         const CANVAS_SIZE = 2160; // 4K Square Resolution
         const canvas = document.getElementById('editorCanvas');
         const ctx = canvas.getContext('2d');
-        
+
         // High resolution for crisp export
         canvas.width = CANVAS_SIZE;
         canvas.height = CANVAS_SIZE;
-        
+
         // Ensure high quality image scaling
         ctx.imageSmoothingEnabled = true;
         ctx.imageSmoothingQuality = 'high';
@@ -362,11 +411,12 @@
         // Application State
         const state = {
             userImg: null,
-            frameImg: null,
+            frameImgs: [],
+            currentFrameIndex: 0,
             scale: 1,
             baseScale: 1,
-            pan: {x: 0, y: 0},
-            drag: {active: false, x: 0, y: 0},
+            pan: { x: 0, y: 0 },
+            drag: { active: false, x: 0, y: 0 },
             currentLang: 'en'
         };
 
@@ -389,7 +439,8 @@
                 alertError: "Could not download image locally due to browser security. Please upload this file to a server/website to enable downloading.",
                 placeholderFrame: "FRAME OVERLAY",
                 placeholderDesc: "Looking for SS.png",
-                
+                chooseFrameText: "Choose Frame",
+
                 // Help Modal Translation
                 helpBtnText: "Help",
                 helpTitle: "How to use",
@@ -420,6 +471,7 @@
                 alertError: "ব্রাউজার সিকিউরিটির কারণে সরাসরি ডাউনলোড ব্লক হয়েছে। এটি অনলাইনে আপলোড করলে সঠিকভাবে কাজ করবে।",
                 placeholderFrame: "ফ্রেম ওভারলে",
                 placeholderDesc: "SS.png খুঁজছি",
+                chooseFrameText: "ফ্রেম নির্বাচন করুন",
 
                 // Help Modal Translation
                 helpBtnText: "সাহায্য",
@@ -441,7 +493,7 @@
             toast.className = 'toast';
             toast.innerText = message;
             container.appendChild(toast);
-            
+
             setTimeout(() => toast.classList.add('show'), 10);
             setTimeout(() => {
                 toast.classList.remove('show');
@@ -470,7 +522,7 @@
 
         function updateLanguageUI() {
             const t = translations[state.currentLang];
-            
+
             document.getElementById('badgeText').innerText = t.badgeText;
             document.getElementById('mainTitle').innerText = t.mainTitle;
             document.getElementById('subTitle').innerText = t.subTitle;
@@ -485,6 +537,9 @@
             document.getElementById('downloadBtnText').innerText = t.downloadBtnText;
             document.getElementById('footerText').innerHTML = t.footerText;
             document.getElementById('langBtnText').innerText = t.langBtnText;
+            if (document.getElementById('chooseFrameText')) {
+                document.getElementById('chooseFrameText').innerText = t.chooseFrameText;
+            }
 
             document.getElementById('helpBtnText').innerText = t.helpBtnText;
             document.getElementById('helpTitle').innerText = t.helpTitle;
@@ -497,13 +552,13 @@
             document.getElementById('closeBtnText').innerText = t.closeBtnText;
             document.getElementById('contactSupportText').innerText = t.contactSupportText;
 
-            if(state.currentLang === 'bn') {
+            if (state.currentLang === 'bn') {
                 document.body.classList.add('lang-bn');
             } else {
                 document.body.classList.remove('lang-bn');
             }
 
-            if(!state.frameImg && !state.userImg) {
+            if (!state.frameImgs[state.currentFrameIndex] && !state.userImg) {
                 drawPlaceholder();
             }
         }
@@ -517,7 +572,7 @@
             ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
             ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
             ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
-            
+
             ctx.lineWidth = 10;
             ctx.strokeStyle = "rgba(251, 191, 36, 0.3)";
             ctx.strokeRect(10, 10, CANVAS_SIZE - 20, CANVAS_SIZE - 20);
@@ -526,65 +581,87 @@
             ctx.font = `bold 48px ${state.currentLang === 'bn' ? "'Hind Siliguri'" : "'Outfit'"}, sans-serif`;
             ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
             ctx.textAlign = "center";
-            ctx.fillText(t.placeholderFrame, CANVAS_SIZE/2, CANVAS_SIZE/2 - 20);
-            
+            ctx.fillText(t.placeholderFrame, CANVAS_SIZE / 2, CANVAS_SIZE / 2 - 20);
+
             ctx.font = `300 24px ${state.currentLang === 'bn' ? "'Hind Siliguri'" : "'Outfit'"}, sans-serif`;
             ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
-            ctx.fillText(t.placeholderDesc, CANVAS_SIZE/2, CANVAS_SIZE/2 + 30);
+            ctx.fillText(t.placeholderDesc, CANVAS_SIZE / 2, CANVAS_SIZE / 2 + 30);
         }
 
-        window.onload = function() {
-            const frame = new Image();
-            frame.crossOrigin = "anonymous";
-            frame.src = "SS.png"; 
-            
-            frame.onload = function() {
-                state.frameImg = frame;
-                draw();
-            };
+        window.onload = function () {
+            const frameSources = ["SS.png", "SS1.PNG"];
 
-            frame.onerror = function() {
-                console.warn("Frame image (SS.png) not found.");
-                document.getElementById('frameWarning').classList.remove('hidden');
-                drawPlaceholder();
-            };
+            frameSources.forEach((src, index) => {
+                const frame = new Image();
+                frame.crossOrigin = "anonymous";
+                frame.src = src;
+
+                frame.onload = function () {
+                    state.frameImgs[index] = frame;
+                    if (index === state.currentFrameIndex) {
+                        draw();
+                    }
+                };
+
+                frame.onerror = function () {
+                    console.warn(`Frame image (${src}) not found.`);
+                    if (index === 0) {
+                        document.getElementById('frameWarning').classList.remove('hidden');
+                        drawPlaceholder();
+                    }
+                };
+            });
+
+            document.querySelectorAll('.frame-btn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    document.querySelectorAll('.frame-btn').forEach(b => {
+                        b.classList.remove('border-amber-400');
+                        b.classList.add('border-transparent');
+                    });
+                    this.classList.remove('border-transparent');
+                    this.classList.add('border-amber-400');
+
+                    state.currentFrameIndex = parseInt(this.getAttribute('data-index'));
+                    draw();
+                });
+            });
         };
 
         document.getElementById('imageInput').addEventListener('change', (e) => {
             const file = e.target.files[0];
-            if(!file) return;
-            
+            if (!file) return;
+
             const loader = document.getElementById('loadingIndicator');
             loader.classList.remove('hidden');
-            
+
             const reader = new FileReader();
             reader.onload = (evt) => {
                 const img = new Image();
                 img.onload = () => {
                     state.userImg = img;
-                    
+
                     const scaleX = CANVAS_SIZE / img.width;
                     const scaleY = CANVAS_SIZE / img.height;
                     const scale = Math.max(scaleX, scaleY);
-                    
+
                     state.baseScale = scale;
                     state.scale = scale;
-                    state.pan = {x: 0, y: 0};
-                    
+                    state.pan = { x: 0, y: 0 };
+
                     const slider = document.getElementById('zoomSlider');
-                    slider.min = scale * 0.5; 
-                    slider.max = scale * 4;   
+                    slider.min = scale * 0.5;
+                    slider.max = scale * 4;
                     slider.value = scale;
-                    
+
                     const controls = document.getElementById('controlsPanel');
                     controls.classList.remove('opacity-30', 'pointer-events-none', 'translate-y-4');
                     controls.classList.add('opacity-100', 'translate-y-0');
-                    
+
                     document.getElementById('uploadPrompt').style.opacity = '0';
                     document.getElementById('downloadBtn').disabled = false;
-                    
+
                     setTimeout(() => { loader.classList.add('hidden'); }, 400);
-                    
+
                     updateZoomUI();
                     draw();
                 };
@@ -595,20 +672,20 @@
 
         function draw() {
             ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
-            
+
             if (state.userImg) {
                 ctx.save();
-                ctx.translate(CANVAS_SIZE/2, CANVAS_SIZE/2);
+                ctx.translate(CANVAS_SIZE / 2, CANVAS_SIZE / 2);
                 ctx.translate(state.pan.x, state.pan.y);
                 ctx.scale(state.scale, state.scale);
-                ctx.drawImage(state.userImg, -state.userImg.width/2, -state.userImg.height/2);
+                ctx.drawImage(state.userImg, -state.userImg.width / 2, -state.userImg.height / 2);
                 ctx.restore();
-            } else if (!state.frameImg) {
+            } else {
                 drawPlaceholder();
             }
 
-            if (state.frameImg) {
-                ctx.drawImage(state.frameImg, 0, 0, CANVAS_SIZE, CANVAS_SIZE);
+            if (state.frameImgs[state.currentFrameIndex]) {
+                ctx.drawImage(state.frameImgs[state.currentFrameIndex], 0, 0, CANVAS_SIZE, CANVAS_SIZE);
             }
         }
 
@@ -616,7 +693,7 @@
             const rect = canvas.getBoundingClientRect();
             const clientX = e.touches ? e.touches[0].clientX : e.clientX;
             const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-            
+
             const scaleX = canvas.width / rect.width;
             const scaleY = canvas.height / rect.height;
 
@@ -627,25 +704,25 @@
         };
 
         const startDrag = (e) => {
-            if(!state.userImg) return;
-            if(e.type === 'touchstart') e.preventDefault(); 
-            
+            if (!state.userImg) return;
+            if (e.type === 'touchstart') e.preventDefault();
+
             state.drag.active = true;
             canvas.style.cursor = 'grabbing';
             const pos = getPos(e);
-            
+
             state.drag.x = pos.x - state.pan.x;
             state.drag.y = pos.y - state.pan.y;
         };
 
         const onDrag = (e) => {
             if (!state.drag.active) return;
-            if(e.type === 'touchmove') e.preventDefault();
+            if (e.type === 'touchmove') e.preventDefault();
 
             const pos = getPos(e);
             state.pan.x = pos.x - state.drag.x;
             state.pan.y = pos.y - state.drag.y;
-            
+
             draw();
         };
 
@@ -657,10 +734,10 @@
         canvas.addEventListener('mousedown', startDrag);
         window.addEventListener('mousemove', onDrag);
         window.addEventListener('mouseup', endDrag);
-        window.addEventListener('mouseleave', endDrag); 
-        
-        canvas.addEventListener('touchstart', startDrag, {passive: false});
-        window.addEventListener('touchmove', onDrag, {passive: false});
+        window.addEventListener('mouseleave', endDrag);
+
+        canvas.addEventListener('touchstart', startDrag, { passive: false });
+        window.addEventListener('touchmove', onDrag, { passive: false });
         window.addEventListener('touchend', endDrag);
 
         document.getElementById('zoomSlider').addEventListener('input', (e) => {
@@ -670,14 +747,14 @@
         });
 
         function updateZoomUI() {
-            if(!state.userImg) return;
+            if (!state.userImg) return;
             const percentage = Math.round((state.scale / state.baseScale) * 100);
             document.getElementById('zoomValue').innerText = percentage + "%";
         }
 
         document.getElementById('downloadBtn').addEventListener('click', () => {
-            if(!state.userImg) return;
-            
+            if (!state.userImg) return;
+
             try {
                 const link = document.createElement('a');
                 link.download = `Eid-Profile-${Date.now()}.png`;
